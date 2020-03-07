@@ -1,21 +1,32 @@
-import React from 'react'
-
+import React from 'react';
 
 const ProductRow = (props) => {
-const {id,name,category,price,qty} = props.product;
-const {deleteProduct} = props;
-    return(
-        <>
-            <p>
-                <span>{name}</span>
-                <span>{category}</span>
-                <span>{price}</span>
-                <span>{qty}</span>
+    let {products,
+        deleteProduct,
+        editProduct
+    } = props;
+    let row = products.map( (product) => {
+        return (
+            <div key = {product.id} className="table__row">
+                <span>{product.name}</span>
+                <span>{product.category}</span>
+                <span>{product.price}</span>
+                <span>{product.qty}</span>
                 <button
-                onClick = {() =>{deleteProduct(id)}}
+                onClick = {() => {editProduct(product.id)}}
+                >Edit</button>
+                <button
+                onClick = {() =>{deleteProduct(product.id)}}
                 >Delete</button>
-            </p>
+            </div>
+        )
+});
+
+    return (
+        <>
+           {row}
         </>
-    )
-}
-export default ProductRow
+    );
+};
+
+export default ProductRow;

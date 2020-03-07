@@ -3,16 +3,10 @@ import ProductRow from '../components/ProductRow'
 
 
 const ProductTable = (props) => {
-let {products,deleteProduct} = props;
-
-
-const ProductList = products.map((product) => { 
-    return (<ProductRow 
-                key={product.id} 
-                product={product}
-                deleteProduct={deleteProduct}
-        />)
-     })
+let {products,
+    deleteProduct,
+    editProduct
+} = props;
 
     return(
         <div className="table">
@@ -23,7 +17,11 @@ const ProductList = products.map((product) => {
                <span>Quantity</span>
                <span>Action</span>
            </div>
-            {ProductList}
+            <ProductRow 
+                products={products}
+                deleteProduct={deleteProduct}
+                editProduct={editProduct}
+                />
         </div>
     )
 }
