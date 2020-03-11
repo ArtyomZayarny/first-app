@@ -17,9 +17,13 @@ class App extends Component{
   }
 
   deleteProduct = (id) => {
-     let products = this.state.products.filter( (product) => product.id !== id)
-      this.setState({products})
+    let sure =  window.confirm('Вы уверены что хотите удалить этот продукт ?')
+      if (sure) {
+        let products = this.state.products.filter( (product) => product.id !== id)
+        this.setState({products})
+      }
     }
+     
 
     editProduct = (id) => {
       //Catch product to edit
@@ -50,13 +54,11 @@ class App extends Component{
   render() {
     return (
       <>
-      { this.state.products.length > 0 &&
           <ProductTable  
-          products={this.state.products}
-          deleteProduct={this.deleteProduct}
-          editProduct={this.editProduct}
+            products={this.state.products}
+            deleteProduct={this.deleteProduct}
+            editProduct={this.editProduct}
           />
-      }
         <AddProductFrom 
             type={this.state.type}
             id={this.state.id}

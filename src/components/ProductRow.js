@@ -12,19 +12,22 @@ const ProductRow = (props) => {
                 <span>{product.category}</span>
                 <span>{product.price}</span>
                 <span>{product.qty}</span>
-                <button
-                onClick = {() => {editProduct(product.id)}}
-                >Edit</button>
-                <button
-                onClick = {() =>{deleteProduct(product.id)}}
-                >Delete</button>
+                <div className="btns">
+                    <button
+                    onClick = {() => {editProduct(product.id)}}
+                    ><i className="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                    <button
+                    onClick = {() =>{deleteProduct(product.id)}}
+                    ><i className="fa fa-trash" aria-hidden="true"></i></button>
+                </div>
             </div>
         )
 });
-
+ 
     return (
         <>
-           {row}
+           
+           {products.length > 0 ? row : <p>Список товаров пуст</p>}
         </>
     );
 };

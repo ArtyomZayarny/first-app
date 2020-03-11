@@ -8,18 +8,16 @@ state = {
     price:'',
     qty:''
 }
- shouldComponentUpdate(nextProps) {
- 
-     if(nextProps.id !== this.props.id) {
-
+ componentDidUpdate(prevProps) {
+     if (prevProps.id !== this.props.id) {
         let {
             id,
             name,
             category,
             price,
             qty
-         } = nextProps.product
-
+        } = this.props.product;
+        
         this.setState({
             id:id,
             name:name,
@@ -27,10 +25,7 @@ state = {
             price:price,
             qty:qty
         })
-         
-     }
-     return true
-     
+     }   
  }
 handleName = (e) => {
     this.setState({
@@ -54,7 +49,6 @@ handleQty = (e) => {
     })
 }
 clearForm = () => {
-    console.log('clear')
     //Clear all fields
     this.setState({
         id:'',
@@ -64,28 +58,30 @@ clearForm = () => {
         qty:''
     })
 }
-serializeForm = (product,type ='add') => {
+serializeForm = (type ='add') => {
+    
+    const result = {};
     if (type === 'add' ) {
-        product.id       = shortid.generate();
+        result.id       = shortid.generate();
     }
-    product.name     = this.state.name;
-    product.category = this.state.category;
-    product.price    = this.state.price;
-    product.qty      = this.state.qty; 
-    return product
+    result.name     = this.state.name;
+    result.category = this.state.category;
+    result.price    = this.state.price;
+    result.qty      = this.state.qty; 
+    return result
 }
    
 handleSubmit= (e,type) => {
     e.preventDefault();
-    let product = {};
+    let product = null;
     switch(type) {
             case 'add':         
-                this.serializeForm(product)
+                product = this.serializeForm()
                 this.props.addProduct(product);
                 this.clearForm();
             break;
             case 'edit':
-                this.serializeForm(product,'edit')
+                product = this.serializeForm('edit')
                 this.props.updateProduct(product);
                 this.clearForm();
             break;
@@ -98,34 +94,45 @@ handleSubmit= (e,type) => {
         let action = type === 'edit' ? 'Save' : 'Add';
        
         return (
-            <form 
-                onSubmit={ (e) =>{this.handleSubmit(e,type)}}
-            >
-               <p> <label>Name
+            <form onSubmit={ (e) =>{this.handleSubmit(e,type)}} >
+               <p> 
+                   <label><span>Name</span>
                     <input 
-                    value={this.state.name}
-                    onChange = {(e) => {this.handleName(e)}}
-                    type="text"/>
-                </label></p>
-                <p> <label>Categoty
+                        value={this.state.name}
+                        onChange = {(e) => {this.handleName(e)}}
+                        type="text"
+                        required={true}
+                    />
+                    </label>
+                </p>
+                <p>
+                    <label><span>Category</span>
                     <input 
-                    value={this.state.category}
-                    onChange = {(e) => {this.handleCategory(e)}}
-                    type="text"/>
-                </label></p>
-                <p> <label>Price
+                        value={this.state.category}
+                        onChange = {(e) => {this.handleCategory(e)}}
+                        type="text"
+                        required={true}
+                    />
+                </label>
+                </p>
+                <p>
+                    <label><span>Price</span>
                     <input 
-                    value={this.state.price}
-                    onChange = {(e) => {this.handlePrice(e)}}
-                    type="text"/>
+                        value={this.state.price}
+                        onChange = {(e) => {this.handlePrice(e)}}
+                        type="number"
+                        required={true}
+                    />
                 </label></p>
-                <p> <label>Quantity
+                <p> <label><span>Quantity</span>
                     <input 
-                    value={this.state.qty}
-                    onChange = {(e) => {this.handleQty(e)}}
-                    type="text"/>
+                        value={this.state.qty}
+                        onChange = {(e) => {this.handleQty(e)}}
+                        type="number"
+                        required={true}
+                    />
                 </label></p>
-                <p><button type="submit">{action} product</button></p>
+                <p><button type="submit" className={action}>{action} product</button></p>
             </form>
         );
     }
