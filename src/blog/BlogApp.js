@@ -1,10 +1,10 @@
 import React from 'react';
 import {BrowserRouter as Router,Switch,Route,Link} from "react-router-dom";
 import { Menu, Header } from 'semantic-ui-react';
-import Home from './Home';
-import Posts from './Posts';
-import Users from './Users';
-import Albums from './Albums';
+import Home from './pages/Home';
+import Posts from './pages/Posts';
+import Users from './pages/Users';
+import Albums from './pages/Albums';
 
 const BlogApp = () => {
     return (
