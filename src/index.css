@@ -110,27 +110,17 @@ button:focus {
   grid-gap: 5px;
   grid-template-columns: repeat(3,1fr);
 }
-.slide-enter,
-.slide-exit {
-  transition: transform 1000ms ease-out;
+.my-node-enter {
+  opacity: 0;
 }
-
-.slide-enter {
-  transform: translateX(100%);
+.my-node-enter-active {
+  opacity: 0;
+  transition: opacity 2000ms;
 }
-
-.slide-enter.slide-enter-active {
-  transform: translateX(0%);
+.my-node-exit {
+  opacity: 0;
 }
-
-.slide-exit {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  transform: translateX(0%);
-}
-
-.slide-exit-active {
-  transform: translateX(-100%);
+.my-node-exit-active {
+  opacity: 1;
+  transition: opacity 2000ms;
 }

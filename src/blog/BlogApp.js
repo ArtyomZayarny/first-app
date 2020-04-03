@@ -9,33 +9,6 @@ import Albums from './pages/AlbumsPage';
 
 import {TransitionGroup, CSSTransition} from  'react-transition-group'
 
-const AnimatedSwitch = withRouter(({ location }) => (
-    <TransitionGroup>
-        <CSSTransition 
-        key={location.key} 
-        classNames="slide" 
-        timeout={3000}
-        >
-        <Switch>
-            <Route path="/" exact>
-                <Home/>
-            </Route>
-            <Route path="/posts" exact>
-                <Posts />
-            </Route>
-            <Route path="/users" exact>
-                <UsersPage />
-            </Route>
-            <Route path="/users/:userId">
-                <UserPage />
-            </Route>
-            <Route path="/albums" exact>
-                <Albums />
-            </Route>
-        </Switch>
-    </CSSTransition>
-</TransitionGroup>
-));
 
 const BlogApp = () => {
     return (
@@ -51,7 +24,23 @@ const BlogApp = () => {
                     <Link to='/users' className='item' activeClassName='active-nav'>Users</Link>
                     <Link to='/albums' className='item' activeClassName='active-nav'>Albums</Link>
                 </Menu> 
-                <AnimatedSwitch /> 
+                <Switch>
+                    <Route path="/" exact>
+                        <Home/>
+                    </Route>
+                    <Route path="/posts" exact>
+                        <Posts />
+                    </Route>
+                    <Route path="/users" exact>
+                        <UsersPage />
+                    </Route>
+                    <Route path="/users/:userId">
+                        <UserPage />
+                    </Route>
+                    <Route path="/albums" exact>
+                        <Albums />
+                    </Route>
+                </Switch>
              </Router>
         </Container>
     );
