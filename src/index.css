@@ -105,11 +105,11 @@ button.Save {
 button:focus {
  outline: none;
 }
-.gallery-grid {
+/* .gallery-grid {
   display: grid;
   grid-gap: 5px;
   grid-template-columns: repeat(3,1fr);
-}
+} */
 .my-node-enter {
   opacity: 0;
 }

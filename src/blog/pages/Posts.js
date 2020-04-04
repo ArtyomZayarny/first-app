@@ -6,7 +6,6 @@ import { CSSTransition} from  'react-transition-group'
 
 
 const Posts = () => {
-    const [inProp, setInProp] = useState(false);
     const [posts, isFetching] = useData('/posts', []);
    
     return (

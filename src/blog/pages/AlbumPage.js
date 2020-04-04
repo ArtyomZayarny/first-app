@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import useData from '../../hooks/useData';
 import { Container,Dimmer,Loader } from 'semantic-ui-react';
+import Glide from '../../blog/glide/Glide'
 
 export default function AlbumPage() {
     const gallery = useRef(null);
@@ -29,14 +30,15 @@ export default function AlbumPage() {
             <Dimmer active={isFetching} inverted>
                 <Loader>Loading...</Loader>
             </Dimmer>
-                {photos.map( (photo) => {
+           { photos.length > 0 &&  <Glide options={{ perView: 3 }} bullets={false}>
+                { photos.map( (photo) => {
                     return (
-                        
-                        <a  href={`${photo.url}`}>
+                        <a  key={photo.url} href={`${photo.url}`}>
                             <img  src={`${photo.thumbnailUrl}`} alt=""/>
                         </a>
                     )
-                })}
+                     })}
+                </Glide> }
             </div>
         </Container>
     )

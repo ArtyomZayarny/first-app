@@ -2,16 +2,18 @@ import React from 'react'
 import useData from '../../hooks/useData';
 import { Container, Dimmer, Loader, List } from 'semantic-ui-react'
 import { NavLink } from 'react-router-dom';
+import { CSSTransition} from  'react-transition-group'
 
 export default function UsersPage() {
     const [users, isFetching] = useData('/users', []);
     return (
           <Container >
-                <h2>Users list</h2>
-                <Dimmer active={isFetching} inverted>
-                    <Loader>Loading...</Loader>
-                </Dimmer>
+            <Dimmer active={isFetching} inverted>
+                <Loader>Loading...</Loader>
+            </Dimmer>
+            <CSSTransition in={isFetching} timeout={2000} classNames="my-node">
                 <List>
+                <h2>Users list</h2>
                 {users.map((user) => {
                     return(
                         <List.Item>
@@ -19,9 +21,8 @@ export default function UsersPage() {
                         </List.Item>
                         )
                     })}
-                 </List>
-                   
-                
+                </List>
+            </CSSTransition>
             </Container>
     )
 }
