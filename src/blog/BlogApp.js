@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import {BrowserRouter as Router,Switch,Route,Link,withRouter } from "react-router-dom";
 import { Menu, Header, Container, } from 'semantic-ui-react';
 import Home from './pages/Home';
@@ -11,6 +11,17 @@ import {TransitionGroup, CSSTransition} from  'react-transition-group'
 
 
 const BlogApp = () => {
+
+    const url = process.env.REACT_APP_DB_URL;
+    console.log(url)
+
+    useEffect( () => {
+        fetch(`${url}/notes.json`)
+        .then(response => response.json())
+        .then((result) => {
+            console.log(result)
+        })
+    }, []);
     return (
         <Container>
             <Router>

@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import BlogApp from './blog/BlogApp'
+import ProductStore from './productStore/productStore'
 
 
-ReactDOM.render(<BlogApp />, document.getElementById('root'));
+ReactDOM.render(<ProductStore />, document.getElementById('root'));
 
