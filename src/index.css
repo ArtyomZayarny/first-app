@@ -124,3 +124,21 @@ button:focus {
   opacity: 1;
   transition: opacity 2000ms;
 }
+button.disabled {
+  opacity: 0.2;
+  pointer-events: none;
+}
+.cart {
+  display: flex;
+  align-items: center;
+}
+.cart  span {
+  width: 20px;
+  height: 20px;
+  background-color: orange;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 3px;
+}

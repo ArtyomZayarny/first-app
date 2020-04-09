@@ -1,17 +1,16 @@
 import React from 'react';
-import {Provider} from 'react-redux'
-import store from './redux/store'
 import {BrowserRouter as Router,Switch,Route,Link,withRouter } from "react-router-dom";
 import { Container, Menu } from 'semantic-ui-react';
 import ProductsPage from './pages/ProductsPage';
 import HomePage from './pages/HomePage'
 import CartPage from './pages/CartPage'
+import {connect} from 'react-redux'
 
 
-const ProductStore = () => {
+
+const ProductStore = (props) => {
 
     return(
-        <Provider store={store}>
             <Router>
                 <Container>
                     <Menu>
@@ -19,7 +18,7 @@ const ProductStore = () => {
                         <Link to="/products" className='item' activeClassName='active-nav'>Products</Link>
                         <Link to="/cart" className='item cart' activeClassName='active-nav'>
                             <div className="cart">
-                                <span>0</span>
+                                <span>{props.cartSize}</span>
                                 <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                             </div>
                         </Link>
@@ -37,7 +36,12 @@ const ProductStore = () => {
                     </Switch>
                 </Container>
             </Router>
-        </Provider>
     )
 }
-export default ProductStore
+const mapStateToProps = state => {
+    return {
+        cartSize: state.products.cart.length
+    }
+}
+
+export default connect(mapStateToProps,null)(ProductStore)

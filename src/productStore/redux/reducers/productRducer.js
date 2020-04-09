@@ -23,7 +23,7 @@ const initState = {
 const productReducer = (state= initState, action) => {
     switch (action.type) {
         case ADD_PRODUCT :
-            console.log('add product!!!!');
+                return {...state, ...state.cart.push(action.payload)}
             break;
 
         default: return state;
