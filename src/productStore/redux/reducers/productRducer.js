@@ -1,4 +1,3 @@
-import {ADD_PRODUCT} from '../actions/product'
 const initState = {
     products: [
                 {
@@ -16,15 +15,12 @@ const initState = {
                     name:'NoteBook',
                     price:700,
                     },
-            ],
-          cart:[]
+            ]
         }
 
 const productReducer = (state= initState, action) => {
     switch (action.type) {
-        case ADD_PRODUCT :
-                return {...state, ...state.cart.push(action.payload)}
-            break;
+
 
         default: return state;
     }

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux'
-import {addProduct} from '../redux/actions/product'
+import {addToCart} from '../redux/actions/cart'
 
 const Product = (props) => {
     const {id,name, price} = props.product;
@@ -8,7 +8,7 @@ const Product = (props) => {
     const [btnStatus, setBtnStatus] = useState(true);
 
     const handleAdd = (id,props) => {
-        props.addProduct(id);
+        props.addToCart(id);
         setBtnStatus(false);
     }
     return (
@@ -22,6 +22,6 @@ const Product = (props) => {
     );
 };
 const mapDispatchToProps = dispatch => ({
-    addProduct: (productId) => dispatch(addProduct(productId))
+    addToCart: (id) => dispatch(addToCart(id))
 })
 export default connect(null,mapDispatchToProps)(Product);

@@ -18,7 +18,7 @@ const ProductStore = (props) => {
                         <Link to="/products" className='item' activeClassName='active-nav'>Products</Link>
                         <Link to="/cart" className='item cart' activeClassName='active-nav'>
                             <div className="cart">
-                                <span>{props.cartSize}</span>
+                                <span>{props.cart.length}</span>
                                 <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                             </div>
                         </Link>
@@ -40,7 +40,7 @@ const ProductStore = (props) => {
 }
 const mapStateToProps = state => {
     return {
-        cartSize: state.products.cart.length
+        cart: state.cart
     }
 }
 
