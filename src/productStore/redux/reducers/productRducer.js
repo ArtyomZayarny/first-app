@@ -3,17 +3,18 @@ const initState = {
                 {
                 id:1,
                 name:'Toster',
-                price:100,
+                price:100
                 },
                 {
                     id:2,
                     name:'Bike',
-                    price:300,
+                    price:300
+
                     },
                 {
                     id:3,
                     name:'NoteBook',
-                    price:700,
+                    price:700
                     },
             ]
         }

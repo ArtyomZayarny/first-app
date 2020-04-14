@@ -4,8 +4,9 @@ import './index.css';
 import App from './App';
 import BlogApp from './blog/BlogApp'
 import ProductStore from './productStore/productStore'
-import AppStore from "./AppStore";
+//import AppStore from "./AppStore";
+import MiddleWareApp from "./middleWare/MiddleWareApp";
 
 
-ReactDOM.render(<AppStore/>, document.getElementById('root'));
+ReactDOM.render(<MiddleWareApp/>, document.getElementById('root'));
 

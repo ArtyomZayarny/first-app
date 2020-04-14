@@ -9,7 +9,10 @@ import {connect} from 'react-redux'
 
 
 const ProductStore = (props) => {
+    const LS = localStorage;
+    let productsAmount = LS.getItem('cart');
 
+    console.log(productsAmount);
     return(
             <Router>
                 <Container>
@@ -18,7 +21,7 @@ const ProductStore = (props) => {
                         <Link to="/products" className='item' activeClassName='active-nav'>Products</Link>
                         <Link to="/cart" className='item cart' activeClassName='active-nav'>
                             <div className="cart">
-                                <span>{props.cart.length}</span>
+                                <span>{productsAmount}</span>
                                 <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                             </div>
                         </Link>
