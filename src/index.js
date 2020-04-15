@@ -7,6 +7,5 @@ import ProductStore from './productStore/productStore'
 //import AppStore from "./AppStore";
 import MiddleWareApp from "./middleWare/MiddleWareApp";
 
-
 ReactDOM.render(<MiddleWareApp/>, document.getElementById('root'));
 
