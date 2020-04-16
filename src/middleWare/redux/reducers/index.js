@@ -1,9 +1,11 @@
 import {combineReducers} from "redux";
-import {FETCH_POSTS_ERROR,FETCH_POSTS_REQUEST,FETCH_POSTS_SUCCESS} from '../actions'
+import {FETCH_POSTS_ERROR,FETCH_POSTS_REQUEST,FETCH_POSTS_SUCCESS,
+    FETCH_POST_CONTENT_ERROR,FETCH_POST_CONTENT_REQUEST,FETCH_POST_CONTENT_SUCCESS} from '../actions'
 
 const initState = {
     isLoading:false,
-    items:[]
+    items:[],
+    content:''
 }
 
 const postsReducer = (state = initState, action) => {
@@ -27,13 +29,31 @@ const postsReducer = (state = initState, action) => {
                 items:[],
                 error:action.payload
             }
+        case FETCH_POST_CONTENT_REQUEST:
+            return {
+                ...state,
+                error:null,
+                isLoading: true
+            }
+        case FETCH_POST_CONTENT_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                content:action.payload
+            }
+        case FETCH_POST_CONTENT_ERROR:
+            return {
+                isLoading: false,
+                content:'',
+                error:action.payload
+            }
         default:return state
     }
 }
 
 
 const rootReducer = combineReducers({
-    posts:postsReducer
+    posts:postsReducer,
 })
 
 export default rootReducer
