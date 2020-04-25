@@ -26,9 +26,10 @@ const fetchPostContentRequest = () => ({
     type:FETCH_POST_CONTENT_REQUEST
 })
 
-const fetchPostContentSuccess = response => ({
+const fetchPostContentSuccess = (response,lang) => ({
     type:FETCH_POST_CONTENT_SUCCESS,
-    payload:response.data
+    payload:response.data,
+    lang:lang
 })
 
 const fetchPostContentError = error => ({
@@ -45,11 +46,11 @@ export const fetchPosts = ()=> {
     }
 }
 
-export const selectPost = (url) => {
+export const selectPost = (url,lang) => {
     return dispatch  =>{
         dispatch(fetchPostContentRequest())
         axios.get(url)
-            .then(response => {dispatch(fetchPostContentSuccess(response))})
+            .then(response => {dispatch(fetchPostContentSuccess(response,lang))})
             .catch(error => {dispatch(fetchPostContentError(error))})
 
     }

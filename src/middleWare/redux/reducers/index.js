@@ -5,7 +5,6 @@ import {FETCH_POSTS_ERROR,FETCH_POSTS_REQUEST,FETCH_POSTS_SUCCESS,
 const initState = {
     isLoading:false,
     items:[],
-    content:''
 }
 
 const postsReducer = (state = initState, action) => {
@@ -29,6 +28,13 @@ const postsReducer = (state = initState, action) => {
                 items:[],
                 error:action.payload
             }
+  
+        default:return state
+    }
+}
+
+const postContentReducer = (state = {content:'',lang:'',isLoading:false}, action) => {
+    switch(action.type) {
         case FETCH_POST_CONTENT_REQUEST:
             return {
                 ...state,
@@ -39,7 +45,8 @@ const postsReducer = (state = initState, action) => {
             return {
                 ...state,
                 isLoading: false,
-                content:action.payload
+                content:action.payload,
+                lang:action.lang
             }
         case FETCH_POST_CONTENT_ERROR:
             return {
@@ -47,13 +54,16 @@ const postsReducer = (state = initState, action) => {
                 content:'',
                 error:action.payload
             }
-        default:return state
+            default:return state
     }
+
 }
+
 
 
 const rootReducer = combineReducers({
     posts:postsReducer,
+    content:postContentReducer
 })
 
 export default rootReducer

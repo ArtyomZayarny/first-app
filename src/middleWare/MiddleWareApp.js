@@ -1,21 +1,15 @@
-import React, {useCallback, useEffect, useState} from 'react'
-import List from './components/List'
-import Content from './components/Content'
-import {Provider, useSelector} from 'react-redux'
+import React from 'react'
+import {Provider} from 'react-redux'
 import store from "./redux/store";
-import {Container,Header} from "semantic-ui-react";
+import {Container} from "semantic-ui-react";
+import { App } from './components/App';
 
-const MiddleWareApp = () => {
-    const[lang,setLang] = useState('')
-    const getLang = useCallback( (lang)=> {
-        setLang(lang)
-    })
+const MiddleWareApp = () => {  
+
     return (
         <Provider store={store}>
             <Container className="gist">
-                <Header>Gists Explorer</Header>
-                <List getLang={getLang}/>
-                {lang && <Content lang={lang}/>}
+                <App />
             </Container>
         </Provider>
     );
