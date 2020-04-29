@@ -1,12 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose')
+const db = mongoose.connection;
 
-const bodyParser = require('body-parser');
 const userRoute = require('./routes/users')
 
 const port = 5000;
 
 const app = express();
+
+app.use(express.urlencoded({extends:true}))
+app.use(express.json())
 
 app.use(userRoute)
 
@@ -18,6 +21,7 @@ async function start() {
             useFindAndModify:false,
             useUnifiedTopology: true
         })
+        db.once('open', function(){})
         app.listen(port, (err) => {
             if (err) {
                 console.log(err);
