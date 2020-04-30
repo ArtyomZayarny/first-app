@@ -15,6 +15,10 @@ router.post('/signup', async (req,res) => {
     const newUser = new User({email:email,name:name,password:HashPassword});
     await newUser.save()
     res.send({message: 'Success!'})
+   
+})
+
+router.post('/auth', async (req, res) => {
     
 })
 
