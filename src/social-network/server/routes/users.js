@@ -1,5 +1,7 @@
 const  {Router} = require('express')
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const {requireAuth} = require('../middleWare')
 const User  = require('../../models/User')
 const router = Router();
 
@@ -28,21 +30,22 @@ router.post('/auth', async (req, res) => {
     bcrypt.compare(password, user.password, (err,result) => {
          if (result) {
                 delete user.password;
-                res.send(user)
+                const authToken = jwt.sign({_id:user._id}, 'secret', {expiresIn:'1h'})
+                res.send({user,authToken})
          } else {
             return res.sendHTTPError(401, 'Password is incorrect');
          }
     })
 })
 
-
-router.get('/users', async (req,res) => {
+//Protect to show users
+router.get('/users',requireAuth, async (req,res) => {
  const result =  await User.find({})
  res.send(result)
 })
 
-router.get('/users/:id', async(req,res) => {
-    const user = await User.findById(req.params.id)
+router.get('/user/:id',requireAuth, async(req,res) => {
+    const user = await User.findOne({_id:req.userId}, {password:false})
     res.send(user)
 })
 

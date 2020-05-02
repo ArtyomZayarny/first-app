@@ -3,8 +3,9 @@ const bcrypt = require('bcrypt');
 const mongoose = require('mongoose')
 const {errorHandler} = require('./middleWare')
 const db = mongoose.connection;
-
+//const userRoute = require('./routes');
 const userRoute = require('./routes/users')
+const postRoute = require('./routes/posts')
 
 const port = 8080;
 
@@ -13,7 +14,7 @@ const app = express();
 app.use(express.urlencoded({extends:true}))
 app.use(express.json())
 app.use(errorHandler)
-app.use(userRoute)
+app.use(userRoute,postRoute)
 
 app.use((req,res,next) => {
     res.status(404).send({message:'NOt found'})
