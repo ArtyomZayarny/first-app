@@ -4,7 +4,7 @@ const User  = require('../../models/User')
 const router = Router();
 
 router.post('/signup', async (req,res) => {
-    const {email, name,password} = req.body;
+    const {email,password} = req.body;
 
     const isUser = await User.findOne({email:email.toLowerCase()})
     if (isUser) {
@@ -12,14 +12,27 @@ router.post('/signup', async (req,res) => {
     } 
     const HashPassword = bcrypt.hashSync(password,10)
 
-    const newUser = new User({email:email,name:name,password:HashPassword});
+    const newUser = new User({email:email,password:HashPassword});
     await newUser.save()
     res.send({message: 'Success!'})
    
 })
 
 router.post('/auth', async (req, res) => {
-    
+    const {email, password} = req.body;
+    const user = await User.findOne({email:email})
+
+    if (!user) {
+        return res.sendHTTPError(401, 'User does not exist');
+    }
+    bcrypt.compare(password, user.password, (err,result) => {
+         if (result) {
+                delete user.password;
+                res.send(user)
+         } else {
+            return res.sendHTTPError(401, 'Password is incorrect');
+         }
+    })
 })
 
 
@@ -33,13 +46,6 @@ router.get('/users/:id', async(req,res) => {
     res.send(user)
 })
 
-
-router.post('/create/user', async(req,res) => {
-    const {name,email,password} = req.body;
-    const newUser = new User({name: name, email:email})
-    await newUser.save()
-    res.send('user was added')
-})
 
 
 module.exports = router

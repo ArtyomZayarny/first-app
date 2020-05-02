@@ -1,12 +1,12 @@
 const express = require('express');
-//const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 const mongoose = require('mongoose')
 const {errorHandler} = require('./middleWare')
 const db = mongoose.connection;
 
 const userRoute = require('./routes/users')
 
-const port = 5000;
+const port = 8080;
 
 const app = express();
 
@@ -25,12 +25,11 @@ app.use((err, req,res,next) => {
 async function start() {
     try {
         await mongoose.connect(
-            'mongodb+srv://social:123@cluster0-fo52v.mongodb.net/todos', {
+            'mongodb+srv://social:123@cluster0-fo52v.mongodb.net/test', {
             useNewUrlParser:true,
-            useFindAndModify:false,
             useUnifiedTopology: true
         })
-        db.once('open', function(){})
+       db.once('open', function(){})
         app.listen(port, (err) => {
             if (err) {
                 console.log(err);
