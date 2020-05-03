@@ -3,9 +3,10 @@ const bcrypt = require('bcrypt');
 const mongoose = require('mongoose')
 const {errorHandler} = require('./middleWare')
 const db = mongoose.connection;
-//const userRoute = require('./routes');
+
 const userRoute = require('./routes/users')
 const postRoute = require('./routes/posts')
+const commentRoute = require('./routes/comments')
 
 const port = 8080;
 
@@ -14,7 +15,7 @@ const app = express();
 app.use(express.urlencoded({extends:true}))
 app.use(express.json())
 app.use(errorHandler)
-app.use(userRoute,postRoute)
+app.use(userRoute,postRoute,commentRoute)
 
 app.use((req,res,next) => {
     res.status(404).send({message:'NOt found'})
@@ -44,5 +45,24 @@ async function start() {
     }
 }
 start()
+/*
+[
+    {
+        id:''
+        userInfo:{
+            email:''
+        },
+        comments: [
+            {
+                userId:'',
+                text:''
+            }
+        ]
+
+    }
+]
+
+
+*/
 
 
