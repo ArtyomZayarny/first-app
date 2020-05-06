@@ -6,36 +6,14 @@ const User  = require('../../models/User')
 const router = Router();
 
 router.post('/signup', async (req,res) => {
-    const {email,password} = req.body;
-
-    const isUser = await User.findOne({email:email.toLowerCase()})
-    if (isUser) {
-        return res.sendHTTPError(400, 'User already exist');
-    } 
-    const HashPassword = bcrypt.hashSync(password,10)
-
-    const newUser = new User({email:email,password:HashPassword});
-    await newUser.save()
-    res.send({message: 'Success!'})
-   
+    const newUser = new User(req.body);
+    await newUser.save();
+    res.send({message:'User was created'})
 })
 
 router.post('/auth', async (req, res) => {
     const {email, password} = req.body;
     const user = await User.findOne({email:email})
-
-    if (!user) {
-        return res.sendHTTPError(401, 'User does not exist');
-    }
-    bcrypt.compare(password, user.password, (err,result) => {
-         if (result) {
-                delete user.password;
-                const authToken = jwt.sign({_id:user._id}, 'secret', {expiresIn:'1h'})
-                res.send({user,authToken})
-         } else {
-            return res.sendHTTPError(401, 'Password is incorrect');
-         }
-    })
 })
 
 //Protect to show users
