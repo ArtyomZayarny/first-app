@@ -10,9 +10,11 @@ router.get('/posts',requireAuth, async (req,res) => {
    })
 //Create post
 router.post('/posts', requireAuth, async (req,res) => {
+   // console.log(req)
     const newPost = req.body;
     newPost.author = req.userId;
-    const post = await new Post({newPost})
+    const post = await new Post(newPost)
+    await post.save();
     res.send(post)
 })
 //Delete post
