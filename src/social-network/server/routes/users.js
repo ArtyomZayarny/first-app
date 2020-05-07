@@ -1,19 +1,29 @@
 const  {Router} = require('express')
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const {requireAuth} = require('../middleWare')
 const User  = require('../../models/User')
 const router = Router();
 
 router.post('/signup', async (req,res) => {
+
     const newUser = new User(req.body);
-    await newUser.save();
+
+    try {
+        await newUser.save();
+    } catch (e) {
+        if (e.code === 11000) {
+            res.sendHTTPError(400,'User already exist');
+        }
+        throw err
+    }
+   
     res.send({message:'User was created'})
 })
 
 router.post('/auth', async (req, res) => {
     const {email, password} = req.body;
-    const user = await User.findOne({email:email})
+    const user = await User.findOne({email:email}).select('+password')
+    const authToken = await user.signIn(password);
+    res.send({authToken,user})
 })
 
 //Protect to show users
