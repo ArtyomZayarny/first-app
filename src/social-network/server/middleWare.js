@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+const User = require('../models/User')
 const errorHandler = (req,res,next) => {
     res.sendHTTPError = (status,message) => {
         res.status(status).json({message})
@@ -12,14 +12,11 @@ const requireAuth = (req,res,next) => {
     }
 
     const token = req.headers.authorization.split(' ')[1];
-    jwt.verify(token, 'secret', (err,decoded) => {
-        if (err) {
-                return res.sendHTTPError(401, err.message)
-        }
-        req.userId = decoded._id;
+    User.verify(token)
+    .then( user => {
+        req.userId = user._id;
         next()
     })
-
 }
 module.exports = {
     errorHandler,

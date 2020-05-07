@@ -23,6 +23,7 @@ router.post('/auth', async (req, res) => {
     const {email, password} = req.body;
     const user = await User.findOne({email:email}).select('+password')
     const authToken = await user.signIn(password);
+    delete user.password;
     res.send({authToken,user})
 })
 
