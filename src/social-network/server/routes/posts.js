@@ -5,7 +5,7 @@ const router = Router();
 
 //Get All posts
 router.get('/posts',requireAuth, async (req,res) => {
-    const result =  await Post.find({})
+    const result =  await Post.find({}).populate('author')
     res.send(result)
    })
 //Create post
