@@ -8,6 +8,7 @@ const router = Router();
 router.post('/posts/:id/comments', requireAuth, async (req,res) => {
  const comment = new Comment({
      body:req.body.text,
+     author:req.userId,
      entityId:req.params.id,
      entityModel:'Post'
  });
