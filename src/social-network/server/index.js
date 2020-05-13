@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose')
 const {errorHandler} = require('./middleWare')
 const db = mongoose.connection;
+const cors = require('cors');
 
 const userRoute = require('./routes/users')
 const postRoute = require('./routes/posts')
@@ -14,6 +15,7 @@ const app = express();
 app.use(express.urlencoded({extends:true}))
 app.use(express.json())
 app.use(errorHandler)
+app.use(cors());
 app.use(userRoute,postRoute,commentRoute)
 
 app.use((req,res,next) => {
