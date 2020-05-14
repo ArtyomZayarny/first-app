@@ -1,5 +1,6 @@
  import React from 'react';
  import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
+ import ProtectedRoute from './components/ProtectedRoute'
  import LoginPage from './features/auth/containers/LoginPage'
  
  function SocialApp(props) {
@@ -13,9 +14,9 @@
                     <Route exact path="/login">
                         <LoginPage />
                     </Route>
-                    <Route exact path="/posts">
+                    <ProtectedRoute exact path="/posts">
                         There are a lot of secrets
-                    </Route>
+                    </ProtectedRoute>
                 </Switch>
              </Router>
              Hello App

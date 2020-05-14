@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useLocation, useHistory} from 'react';
 import {useDispatch} from 'react-redux';
 import {login} from '../../auth/slices/currentUser'
 import { useCallback } from 'react';
@@ -7,7 +7,12 @@ const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const location = useLocation();
+    const history = useHistory();
     const dispatch = useDispatch();
+    const { from } = location.state || { from: { pathname: "/" } };
+
+
     const submitForm = useCallback( (e) => {
         e.stopPropagation();
         e.preventDefault();
