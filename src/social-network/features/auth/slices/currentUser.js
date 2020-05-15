@@ -5,7 +5,11 @@ import apiClient from '../../../api-client'
 const login = createAsyncThunk(
     'currentUser/login',
     async (credentials) => {
+        console.log(credentials);
+        
         const response = await apiClient.post('/auth', credentials);
+        console.log(response);
+        
         return response.data
     }                   
    

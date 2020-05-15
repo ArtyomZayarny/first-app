@@ -20,6 +20,8 @@ router.post('/signup', async (req,res) => {
 })
 
 router.post('/auth', async (req, res) => {
+    console.log(2);
+    
     const {email, password} = req.body;
     const user = await User.findOne({email:email}).select('+password')
     const authToken = await user.signIn(password);

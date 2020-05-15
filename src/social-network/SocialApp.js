@@ -15,7 +15,7 @@
                         <LoginPage />
                     </Route>
                     <ProtectedRoute exact path="/posts">
-                        There are a lot of secrets
+                        <h2>Hello protected page</h2>
                     </ProtectedRoute>
                 </Switch>
              </Router>
