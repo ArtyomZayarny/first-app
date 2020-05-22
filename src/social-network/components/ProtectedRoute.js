@@ -13,10 +13,10 @@ export default function ProtectedRoute({ children, ...rest }) {
   return (
     <Route
       {...rest}
-      render={({ location }) =>
+      render={({props}) =>
         isAuthenticated
           ? children
-          : <Redirect to={{ pathname: '/login', state: { from: location } }} />
+          : <Redirect to={{pathname:'/login', state: {from: props.location } }}/>
       }
     />
   );

@@ -16,12 +16,10 @@ router.post('/signup', async (req,res) => {
         throw err
     }
    
-    res.send({message:'User was created'})
+    res.send(newUser)
 })
 
 router.post('/auth', async (req, res) => {
-    console.log(2);
-    
     const {email, password} = req.body;
     const user = await User.findOne({email:email}).select('+password')
     const authToken = await user.signIn(password);
@@ -30,13 +28,13 @@ router.post('/auth', async (req, res) => {
 })
 
 //Protect to show users
-router.get('/users',requireAuth, async (req,res) => {
+router.get('/api/users',requireAuth, async (req,res) => {
  const result =  await User.find({})
  res.send(result)
 })
 
-router.get('/user/:id',requireAuth, async(req,res) => {
-    const user = await User.findOne({_id:req.userId}, {password:false})
+router.get('/api/me',requireAuth, async(req,res) => {
+    const user = await User.findById(req.userId);
     res.send(user)
 })
 

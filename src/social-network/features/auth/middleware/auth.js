@@ -1,4 +1,4 @@
-import {login} from '../slices/currentUser';
+import {login} from '../slices/currentUserSlice';
 import apiClient from '../../../api-client';
 
 

@@ -5,7 +5,7 @@ const router = Router();
 
 
 //Create comment
-router.post('/posts/:id/comments', requireAuth, async (req,res) => {
+router.post('/api/posts/:id/comments', requireAuth, async (req,res) => {
  const comment = new Comment({
      body:req.body.text,
      author:req.userId,
@@ -16,7 +16,7 @@ router.post('/posts/:id/comments', requireAuth, async (req,res) => {
  res.send(comment)
 })
 //Get comment
-router.get('/posts/:id/comments',requireAuth, async (req,res) => {
+router.get('/api/posts/:id/comments',requireAuth, async (req,res) => {
     const comment  =  await Comment.find({entityId:req.params.id}).populate('author');
     res.send(comment)
    })
@@ -26,8 +26,6 @@ router.delete('/comments/:id',requireAuth, async(req,res) => {
     await Comment.deleteOne({_id:req.params.id})
     res.send('Comment was removed')
 })
-
-
 
 //Get one comment
 router.get('/comments/:id',requireAuth, async(req,res) => {

@@ -1,4 +1,5 @@
 const express = require('express');
+require('express-async-errors');
 const mongoose = require('mongoose')
 const {errorHandler} = require('./middleWare')
 const db = mongoose.connection;
@@ -8,7 +9,7 @@ const userRoute = require('./routes/users')
 const postRoute = require('./routes/posts')
 const commentRoute = require('./routes/comments')
 
-const port = 8080;
+const port = 5000;
 
 const app = express();
 

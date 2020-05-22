@@ -1,11 +1,11 @@
 import axios from 'axios';
 import store from './configureStore';
-import { logout } from './features/auth/slices/currentUser'
+import { logout } from './features/auth/slices/currentUserSlice'
 
 const authToken = localStorage.getItem('authToken');
 
 const apiClient = axios.create({
-    baseURL:'http://localhost:8080'
+    baseURL:'http://localhost:5000'
 });
 
 if (authToken) {
@@ -18,6 +18,7 @@ apiClient.interceptors.response.use(function (response) {
     //catches if the session ended!
     if ( error.response.status === 401) {
         console.log("Auth error", error.response.data);
+        localStorage.clear();
         store.dispatch(logout());
     }
     return Promise.reject(error);

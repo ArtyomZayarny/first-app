@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { useLocation, useHistory } from 'react-router-dom'
 import {useDispatch} from 'react-redux';
-import {login} from '../../auth/slices/currentUser'
+import {login} from '../../auth/slices/currentUserSlice'
 import { useCallback } from 'react';
 
 const LoginPage = () => {

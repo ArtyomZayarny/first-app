@@ -1,5 +1,5 @@
 import {configureStore,getDefaultMiddleware} from '@reduxjs/toolkit'
-import currentUser from './features/auth/slices/currentUser'
+import currentUser from './features/auth/slices/currentUserSlice'
 import authMiddleware from  './features/auth/middleware/auth'
 
 const middleware  = [
